@@ -104,10 +104,6 @@ public class Order implements Serializable{
 		this.status = status;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public Set<Product> getProducts() {
 		return products;
 	}
@@ -136,6 +132,5 @@ public class Order implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }
