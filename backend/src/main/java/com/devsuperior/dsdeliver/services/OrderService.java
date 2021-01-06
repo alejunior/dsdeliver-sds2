@@ -33,8 +33,7 @@ public class OrderService {
 	
 	@Transactional(readOnly = true)
 	public OrderDTO findOne(Long id){
-		Order order = repository.findOne(id);
-		return new OrderDTO(order);
+		return new OrderDTO(repository.findOne(id));
 	}
 	
 	@Transactional
@@ -45,16 +44,14 @@ public class OrderService {
 			Product product = productRepository.getOne(p.getId());
 			order.getProducts().add(product);
 		}
-		order = repository.save(order);
-		return new OrderDTO(order);
+		return new OrderDTO(repository.save(order));
 	}
 	
 	@Transactional
 	public OrderDTO setDelivered(Long id) {
 		Order order = repository.getOne(id);
 		order.setStatus(OrderStatus.DELIVERED);
-		order = repository.save(order);
-		return new OrderDTO(order);
+		return new OrderDTO(repository.save(order));
 	}
 
 }

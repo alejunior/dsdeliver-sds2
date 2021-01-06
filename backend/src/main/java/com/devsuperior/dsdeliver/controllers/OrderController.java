@@ -26,28 +26,24 @@ public class OrderController {
 
 	@GetMapping
 	public ResponseEntity<List<OrderDTO>> findAll() {
-		List<OrderDTO> list = service.findAll();
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok(service.findAll());
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<OrderDTO> findOne(@PathVariable Long id) {
-		OrderDTO dto = service.findOne(id);
-		return ResponseEntity.ok(dto);
+		return ResponseEntity.ok(service.findOne(id));
 	}
 
 	@PostMapping
 	public ResponseEntity<OrderDTO> insert(@RequestBody OrderDTO dto) {
-		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 					.buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+		return ResponseEntity.created(uri).body(service.insert(dto));
 	}
 	
 	@PutMapping("/{id}/delivered")
 	public ResponseEntity<OrderDTO> setDelivered(@PathVariable Long id){
-		OrderDTO dto = service.setDelivered(id);
-		return ResponseEntity.ok(dto);
+		return ResponseEntity.ok(service.setDelivered(id));
 	}
 
 }

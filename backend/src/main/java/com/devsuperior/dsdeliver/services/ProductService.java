@@ -22,4 +22,11 @@ public class ProductService {
 		List<Product> list = repository.findAllByOrderByNameAsc();
 		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
 	}
+
+	@Transactional(readOnly = true)
+	public ProductDTO findOne(Long id){
+		Product product = repository.findOne(id);
+		return new ProductDTO(product); 
+	}
+
 }
